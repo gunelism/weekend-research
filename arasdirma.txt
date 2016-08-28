@@ -1,0 +1,465 @@
+//1ci sual "&$" menasi
+$so=5;
+function some($so){
+	$so++;
+	// echo "$so";
+}
+some($so);
+
+//bu funksiya ile ashagidaki funksiyanin ferqine baxanda gorunue ki & isharesinin 
+ustunluyu nedir. yeni ashagidaki funksiya "flexible" sayilir. ne qeder deyishen elave 
+etsen her birine gore ayrica neticeni verecek. ammayuxaridaki funksiya ancaq bir 
+deyishen ucun ishleye biler.
+function foo(&$var)
+{
+    $var++;
+}
+
+$a=5;
+$b=6;
+foo($a);
+foo($b);
+
+// echo "$a <br>";
+// echo "$b";
+
+
+
+//2ci sual $$ menasi
+$name="gunel"; 
+$$name="ismayil"; 
+echo $name."<br/>"; 
+echo $$name."<br/>";
+//bunu nece izah edim deyishen icinde deyishen kimi anlamaq olar. ashagidaki shekilde 
+de yazilir. ve bunu sonsuza imi kimi ic ice yazmaq olar 
+$name1="gunel1"; 
+${$name1}="ismayil1";
+${${$name1}}="ismayilova" ;
+echo $name1."<br/>"; 
+echo ${$name1}."<br/>"; 
+echo "${${$name1}}"."<br/>";
+
+
+
+
+//3cu sual isset() menasi. isset() funksiyasi o zaman TRUE qaytarir ki yoxladigi 
+deyishen set(qurashdirilmish) olsun. eks halda eger deyishen unset() yeni 
+qurashdirilmayibsa FALSE qaytaracaq. deyishenin deeri NULL-a beraber edilibse 
+onda o FALSE qaytaracaq.
+$d = "test";
+$e = "anothertest";
+
+var_dump(isset($d));      // TRUE
+var_dump(isset($d, $e)); // TRUE
+
+unset ($d);
+
+var_dump(isset($d));     // FALSE
+var_dump(isset($d, $e)); // FALSE
+
+$f = NULL;
+var_dump(isset($f));   // FALSE
+
+
+
+//4cu sual serialize() menasi. serialize deyeri yadda saxlayir ve teqdim etmek
+ ucun imkan yaradir. yeni PHP deyerleri arasinda oturmeye imkan verir hec bir 
+struktur deyishikliyi olmadan.
+
+
+
+//5ci sual.ekrana ne cixacaq ve niye? 
+
+   $g = 5;
+function foo3(&$var)
+{
+    $var++;
+    echo $var;
+}
+function &bar()
+{
+   return $g;
+}
+ $foo2 = foo3(bar());
+ //ekrana bir cixacaq 
+
+
+
+ //6ci sual
+$juice = "apple";
+echo "<q>He drank some $juice juice.</q>";
+
+
+
+ //7ci sual unlink() ve unset(). unlink() funskiyasi faylin adin silir, directory (adresi) 
+ile birlikde tamamile silir. unset() funsksiyasi verilen deyisheni destroy yeni mehv edir.
+ UNDO (geri qaytarma) emeliyyatlarinin yerine yetirilmesinde istifade olunur, cunki unset
+ ederken folderde olanlari daimi silmir sadece temizleyir.
+
+
+
+//8ci sual.  var_dump etdikden sonra gorunur ki hansi neticeni verir. CAVAB: B (array)
+
+ $records = [
+    [ 'id' => 2135, 'first_name' => 'John', 'last_name' => 'Doe' ],
+    [ 'id' => 3245,'first_name' => 'Sally', 'last_name' => 'Smith' ],
+    [ 'id' => 5342, 'first_name' => 'Jane', 'last_name' => 'Jones' ],
+    [ 'id' => 5623, 'first_name' => 'Peter', 'last_name' => 'Doe' ]
+];
+
+$first_names =  array_column($records,'first_name');
+print_r($first_names);echo "<br>";
+var_dump($first_names); 
+
+
+
+//9cu sual. 
+
+function some($s){
+	$i=0;
+	while ($s[$i]){
+	  $i++;
+	}
+	print $i;
+}
+some("hey");
+
+
+
+//10cu sual. VE emeliyyatinda ikisnden biri eger false olsa cavab mutleq false sayilir.
+ VE YA emeliyyatinda ise eger bir dene de olsa true varsa bu true sayilir.  
+ $x= true && false;
+ var_dump($x);
+
+
+
+
+//11ci sual. onluq sistemde olan 255 reqemi ikilik sistemde bu shekilde shekilde 
+11111111, hexadecimal(16liq say sistemi) sistemde ise "0xff" sheklinde yazilir. bu 
+funksiyada ise deyilir ki eger 16liqda olan 255 beraberdise onluqda olan 255. onda 
+0xff-in int hissesini ekrana ver. onun da int hisses sifirdir. ve echo etsek cavab 0 
+olacaq.
+ $x = NULL;
+     if ('0xFF' == 255) {
+    $x = (int)'0xFF';
+}    
+echo "$x";
+
+
+
+//12ci sual.
+
+	$i = 016;
+    echo $i / 2;
+bu emeliyyatin cavabi 7 olacaq. Cunki 16 liq say sistemidir ve qarsisindaki 0 onu 8-lik 
+say sistemine kecirir ve 016 ededini onluq say sisteminden 8-lik say sistemine kecirerken 
+cavab 14 verir
+ 14 / 2 ise 7 verir.
+
+
+
+//13cu sual.
+Static xususiyyetine sahib olan klass daxilinde deyishen ve ya funksiya eyni bir
+ deyere sahib olur ve her defe eyni deyer qaytarir buna gore her klass daxilinde 
+static xususiyyetini istifade etmek duzgun deyildr.Hemde static teyin olunmush 
+ klass daxilindekiler ramda saxlanilir. bu ozelliye sahib olanlara muraciet etmek 
+ucun klass teyin etmek lazim deyil
+ muraaciet ucun $this-den istifaade yerine self -den istfade olunur:
+
+class some
+{
+    private static $name = 'gunel';
+ 
+    public static function some1() 
+    {
+        echo self::$name;
+    }
+}
+ 
+some::some1(); 
+
+// final keyword-i istifade edilen class-lar yalniz 1 defe istifade olunur.
+hetta bawqa bir class-a extend edildiyi zaman hemin class-in cavabi error olur 
+cunki final clas-i artq istifade edilmiw olur.
+
+
+
+//14cu sual. session ve coockies.
+session server de saxlanilir ve kimse onun uzerinde cetinilikle emeliyyat aparib
+deyishilik ede biler. session-lar da coockies vasitesile heyata kecirilir, amma esas 
+melumar brauserde saxlanmir, istifadecinin serverdeki yerinde saxlanir.
+coockies ise klientin kompyuterinde saxlanir ve onun asanliqla deyishlik ede biler 
+uzarinde. hem de serverin istifadecinin etdiklerini izlemek(track) etmekcun lazimdir.
+
+
+
+//15ci sual. 
+private yalniz yazidigin klasin daxilinde istifade oluna bilir.ondan xaricde olmur.
+
+Private istifade etdiyimiz zaman "private $name" $name-e klass xaricinde 
+muraciet etmek olmur. eger herhansi public funtion daxilinde yazlbsa klass 
+xaricinde hemin funksiyani cagirmaqla ekrana $name-in deyerini cixarmaq olur.
+  class WebDeveloper {
+    private $name;
+    private function __construct($name) {
+      $this->name = $name
+    }
+  }
+$developer = new WebDeveloper('jordizle');
+  echo $developer->name;       burada o sene deyeri qayataracaq.
+
+Protected Private-e benzeyir amma tek ferq bashqa bir klassa Some1 klassini extend
+ elesek onda protected $name-i ekrana yazdira bilerik lakin private $name olsa extend
+ olunmush klassda bele ona muraciet etmek olmur 
+
+  class WebDeveloper {
+    private $name;
+    private function __construct($name) {
+      $this->name = $name
+    }
+    public function getName() {
+      return $this->name;
+    }
+  }
+
+  $developer = new WebDeveloper('jordizle');
+  echo $developer->name;    error verecek. klassdan kenarda istifade olunmur. 
+amma public vermkele istifade etmek olar.
+}
+
+
+
+
+//16ci sual.
+//trait de klass kimidir lakin ancaq qrup funksionalliginin daxilinde nezerde 
+tutlmushdur ardiicl olaraq. lakin trait-in ozunu misal etmek olmur. klass istifade 
+etmeyin flexible olmagi ustunluyu var trait-den. traitler class xaricinde yazilmis 
+umumilesmish xususiyyetdir.Class xaricinde tanitmaqla bir nece class icerisinde istifade
+ ede bilerik.                       
+
+
+trait T {
+    public function foo() {
+    return 1;
+	}
+}
+class A { 
+    use T;
+    public function foo() {
+    return 2;
+	}
+}
+
+$a = new A;
+echo $a->foo();
+
+
+
+//17ci sual.
+
+class Database
+{
+	public $host;
+	public $username;
+	public $password;
+	public $name;
+	public $connected;
+
+	function __construct($host, $username, $password, $name){
+		$this->host = $host;
+		$this->username = $username;
+		$this->password = $password;
+		$this->name = $name;
+	}
+
+	public function connect(){
+		$this->connected = mysqli_connect($this->host, $this->username, $this->password, $this->name);
+	
+		 if ($this->connected) {
+        
+	        }
+        	else {
+           		echo "error";
+        	}
+	}
+
+$Db = new Database("localhost","root","","crudoop");
+$Db -> connect();
+
+
+
+
+//18ci sual.
+__constructor funnksiyasi terefinden.
+
+
+
+//19cu sual kalkulyator
+function hesablama($a,$b,$c){
+      if ($c =="+") {
+         echo $a + $b ;
+      }
+      elseif ($c =="-") {
+         echo $a - $b;
+      }
+      elseif ($c =="*") {
+         echo $a * $b;
+      }
+      elseif ($c =="/") {
+         if ($a==0) {
+            echo " 0-a bolmek olmaz";
+         }
+         else {
+            echo $a/$b;
+         }
+      }
+   }
+   hesablama(16,4,"/"); 
+
+
+
+//20ci sual. __sleep   __wakeup
+magic functions. sehrli funksiyalar hesab olunurlar. 
+__sleep konstruktor funksiyasi varsa eger onda bu en onde yerine yetir.
+ obyekti temizleye bilir ve ardicilliqda olan deyishenlerin adlarini array 
+sheklinde qaytarir. eger bir shey qaytarmirsa onda null olur. 
+eger __wakeup istifade olunubsa o obyektin butun resorslarini yeniden qurashdira bilir.
+ esas meqsedi databasa ile elaqe emeliyyati zamani itirlen melumatlarin geri qaytarilmasi
+ ucundur. 
+
+
+
+
+//21ci sual. 
+session_unregister() - global deyishkeni oldugu session-dan unregister 
+edir(qeydden cixarir).
+session_unset() ise -  butun hal-hazirda qeydde olan session-lari azad edir.
+ hec bir deyer qaytarmir. amma butun sessionlari unset etme olmaz yeni bu shekilde
+  unset($_SESSION) olmaz. cunki superglobal-da olan butun sesssion-lara qadaga qoya biler.
+
+
+
+
+//22ci sual. 
+globalda olan butun deyishenleri gosterir.
+function test() {
+    $foo = "local variable";
+
+    echo '$foo in global scope: ' . $GLOBALS["foo"];  
+    echo '$foo in current scope: ' . $foo;
+}
+
+$foo = "Example content";
+test();
+
+
+
+
+//23cu sual
+$some = $_FILES['file_name']['error'];
+if($some != 0) {
+  echo 'error';
+
+
+
+//24cu sual. 
+$target_dir = "uploads/";
+$target_file = $target_dir . date('dmYGis') . basename($_FILES["sekil"]["name"]);
+
+$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+echo $imageFileType;
+
+
+if ($imageFileType == 'jpg' || $imageFileType == 'png'|| $imageFileType == 'gif') {
+    if ($_FILES['sekil']['size'] < 500*1024) {
+        move_uploaded_file($_FILES["sekil"]["tmp_name"], $target_file);
+    } else {
+        echo 'olçu boyukdu max 500 kb';
+    }
+} else {
+    echo 'bu fayl ' . $imageFileType;
+}
+
+
+
+//25ci sual.
+$txt1 = "Hello";
+$txt2 = " world!";
+$txt1 .= $txt2;
+echo $txt1; 
+buradan gormek olur ki bir deyishene digerinin .= vasitesile menimsetmekle neticede 
+ancaq birini esas olani ekrana vere bilirik. yeni birleshdirerk beraber etmek. teyinatli 
+birleshdirme
+
+$txt1 = "Hello";
+$txt2 = " world!";
+echo $txt1 . $txt2; noqte ise yalniz birleshdirme xususiyyetine malikdir. 
+
+
+
+//26ci sual cavab: getimagesize();
+
+list($width, $height) = getimagesize('path to image');
+echo "width: " . $width . "<br />";
+echo "height: " .  $height;
+
+
+
+//27ci sual. error types
+esasen 4nov error var:
+1.Parse Error (Syntax Error)
+2.Fatal Error
+3.Warning Error
+4.Notice Error
+		1.sintaksis errorun bir nece yaranma sebebi var:
+	1.baglanmamish ishareler( "", '', ;, ve s.)
+	2.catishmayan morterize( (), [], {} )
+		
+		2.fatal error
+	bu error o ne zaman peyde olur? PHP yazidigin kodu anlayir amma istediyini sene
+vere bilmir. yeni emeliyyat yerine yetirile bilmeyib. eger mueyyen olunmamish
+ funskiyani yerine yetirmeye calishirsansa onda fatal error gelir.
+
+		3.warning error
+duzgun fayl ve reqem vermedikde emeliyyat dayana bilmir. bu warning errora sebeb olur.
+meselen include veririk amma hemin adda bir php fayli movcud deyil.
+<?php
+echo "Warning Error!!";
+include ("Welcome.php");
+?>
+
+		4.notice error.warning error kimidir. proses dayana bilmir. teyin 
+olunmamish deyishene daxil olmaq istedikde meselen:
+$a="gunelismayil";
+echo $b;
+
+
+
+//28ci sual
+$_PHP_SELF deyishendir. emeliyyatda olan scripti qaytarir. adini ve yerini verir.
+bunu action olan hisselerde meselen formlarda istifade etmek olur.	
+<form  method="post" action="form-action.php" > 	bu hemishe gorduyumuzdu	
+
+form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" > bele de 
+yazmaq olar PHP_SELF vasitesile.
+
+
+
+//29cu sual
+interface abstrakt klasslardir. metodlari var amma icinde static value(deyerler) dashimir.
+meselen bele.
+interface animal {
+function breath();
+function eat();
+}
+eger classda interface-den istifade ediremse classi teyin etdiyim interface-e 
+uygun olaraq hereket etmelidi yeni sertlerine uymalidir ve bu boyuk proektlerde 
+istifade olunur.
+
+
+//30cu sual
+bool mail ( string $to , string $subject , string $message [, string $additional_headers [, string $additional_parameters ]] )
+TO- kime gonderilecek. qebul edenin mail-i.
+SUBJECT - gonderilecek mektubun movsuzu.
+MESSAGE - urek sozlerin :)   ->  $text = str_replace("\n.", "\n..", $text);
