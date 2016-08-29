@@ -81,7 +81,8 @@ function &bar()
    return $g;
 }
  $foo2 = foo3(bar());
- //ekrana bir cixacaq 
+ //ekrana bir cixacaq bar funksiyasi $a propertysini gormur. Neticede  null qaytarir.
+ foo funksiyasi da hemin null-u bir vahid artiraraq  1 edir.
 
 
 
